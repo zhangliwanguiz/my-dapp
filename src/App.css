@@ -1,42 +1,415 @@
+/* App.css */
+
+/* 全局样式 */
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif; /* 使用 Inter 字体 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f7f8fa; /* 浅灰色背景 */
+  color: #333;
+  line-height: 1.6;
+  min-height: 100vh; /* 确保body占据整个视口高度 */
+  display: flex; /* 使用flex布局 */
+  flex-direction: column; /* 垂直方向排列 */
+}
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  display: flex;
+  flex-direction: column; /* 垂直方向排列 */
+  flex-grow: 1; /* 占据剩余空间 */
+  justify-content: flex-start; /* 内容从顶部开始 */
+  align-items: center; /* 水平居中所有子项 */
+  min-height: 100vh; /* 确保root占据整个视口高度 */
+  box-sizing: border-box;
+  padding: 20px; /* 增加一些整体内边距 */
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1000px; /* 增加整体宽度，并限制最大宽度 */
+  margin: 0 auto; /* 水平居中 */
+  box-sizing: border-box;
+}
+
+/* 导航栏样式 */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 15px; /* 圆角 */
+  margin-bottom: 20px; /* 与下方内容的间距 */
+  width: 100%; /* 确保导航栏占据100%宽度 */
+  box-sizing: border-box;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 25px;
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  font-size: 2rem;
+  color: #ff007a;
+  font-weight: bold;
 }
 
-@keyframes logo-spin {
+.navbar nav {
+  display: flex;
+  gap: 15px;
+}
+
+.nav-item {
+  background: none;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.nav-item:hover {
+  background-color: #f0f0f0;
+}
+
+.nav-item.active {
+  color: #ff007a;
+  background-color: #ffe6f0; /* 激活状态的背景色 */
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.wallet-connected {
+  display: flex;
+  align-items: center;
+  background-color: #e6e6fa; /* 浅紫色背景 */
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  color: #6c5ce7;
+  font-weight: 600;
+}
+
+.wallet-address-display {
+  margin-right: 8px;
+}
+
+.wallet-status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #28a745; /* 绿色表示连接 */
+  border-radius: 50%;
+}
+
+/* 主要内容区域 */
+.main-content {
+  display: flex;
+  justify-content: center; /* 水平居中内容 */
+  padding: 0 20px; /* 左右内边距 */
+  flex-grow: 1; /* 占据剩余空间 */
+  align-items: flex-start; /* 内容从顶部开始 */
+}
+
+/* 主容器样式 (用于兑换和资金池卡片) */
+.container {
+  background-color: #fff;
+  border-radius: 20px; /* 圆角 */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* 更明显的阴影 */
+  padding: 30px;
+  max-width: 450px; /* 兑换/资金池卡片的宽度 */
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center; /* 居中内容 */
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* 增加模块间距 */
+}
+
+/* 兑换卡片样式 */
+.swap-card, .pool-card {
+  width: 100%;
+  text-align: left; /* 内部文本左对齐 */
+}
+
+.swap-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.swap-header h3 {
+  margin: 0;
+  font-size: 1.6rem; /* 稍微大一点 */
+}
+
+.settings-icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.2s ease-in-out;
+}
+
+.settings-icon:hover {
+  color: #333;
+}
+
+.input-section {
+  background-color: #f0f0f0; /* 浅灰色背景 */
+  border-radius: 16px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.swap-input-field {
+  flex-grow: 1;
+  border: none;
+  background: none;
+  font-size: 2rem; /* 很大的字体 */
+  font-weight: bold;
+  color: #333;
+  padding: 0;
+  outline: none;
+}
+
+.swap-input-field::placeholder {
+  color: #aaa;
+}
+
+.token-select-button {
+  background-color: #ff007a; /* 粉色按钮 */
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.token-select-button:hover {
+  background-color: #e6006f;
+}
+
+.dropdown-arrow {
+  font-size: 0.8rem;
+}
+
+.usd-value {
+  font-size: 0.9rem;
+  color: #777;
+  margin-top: 5px;
+  text-align: right;
+}
+
+.swap-arrow-container {
+  text-align: center;
+  margin: -10px 0; /* 调整位置 */
+  z-index: 1; /* 确保在输入框上方 */
+}
+
+.swap-arrow-button {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #ff007a;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.swap-arrow-button:hover {
+  background-color: #f0f0f0;
+  transform: rotate(180deg); /* 旋转效果 */
+}
+
+/* 兑换按钮 */
+.swap-button {
+  width: 100%;
+  padding: 18px; /* 更大的内边距 */
+  background-color: #ff007a;
+  color: white;
+  border: none;
+  border-radius: 18px; /* 更大的圆角 */
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out, box-shadow 0.2s ease-in-out;
+  box-shadow: 0 5px 15px rgba(255, 0, 122, 0.25);
+  margin-top: 20px;
+}
+
+.swap-button:hover:not(:disabled) {
+  background-color: #e6006f;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 0, 122, 0.35);
+}
+
+.swap-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.secondary-swap-button {
+  background-color: #6c5ce7; /* 反向兑换按钮使用紫色 */
+  box-shadow: 0 5px 15px rgba(108, 92, 231, 0.25);
+  margin-top: 10px; /* 与上一个按钮的间距 */
+}
+
+.secondary-swap-button:hover:not(:disabled) {
+  background-color: #5a4bcf;
+  box-shadow: 0 8px 20px rgba(108, 92, 231, 0.35);
+}
+
+
+/* 资金池卡片样式 (与兑换卡片类似，但可根据需要调整) */
+.pool-card {
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  width: 100%; /* 确保卡片宽度为100% */
+}
+
+.pool-card .input-section {
+  background-color: #f0f0f0;
+  border-radius: 16px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+}
+
+.pool-card .input-field {
+  width: calc(100% - 60px); /* 为代币选择按钮留出空间 */
+  border: none;
+  background: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  padding: 0;
+  outline: none;
+}
+
+.pool-card .action-button {
+  margin-top: 20px;
+}
+
+
+/* 消息框样式 */
+.message-box-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6); /* 半透明黑色背景 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* 确保在最上层 */
+}
+
+.message-box-content {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  max-width: 350px;
+  width: 90%;
+  text-align: center;
+  animation: fadeInScale 0.3s ease-out forwards; /* 动画效果 */
+}
+
+.message-box-content p {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+.message-box-button {
+  background-color: #ff007a;
+  color: white;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.message-box-button:hover {
+  background-color: #e6006f;
+}
+
+/* 动画定义 */
+@keyframes fadeInScale {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: scale(0.9);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
   }
-}
 
-.card {
-  padding: 2em;
-}
+  .navbar-left {
+    flex-direction: column;
+    gap: 10px;
+  }
 
-.read-the-docs {
-  color: #888;
+  .navbar nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .main-content {
+    padding: 0 15px;
+  }
+
+  .container {
+    padding: 20px;
+  }
+
+  .swap-input-field {
+    font-size: 1.5rem;
+  }
 }
